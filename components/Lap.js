@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet,View,Text} from 'react-native';
 import Timer from './Timer';
-const Lap=({number,interval,fastest,slowest})=>{
+const Lap=({number,interval,fastest,slowest,timer})=>{
 
     const lapStyle=[styles.lapText,
         fastest && styles.fastest,
@@ -16,7 +16,7 @@ const Lap=({number,interval,fastest,slowest})=>{
             <Text style={lapStyle}>Lap {number}</Text>
             <Text style={lapStyle}>
 
-                <Timer interval={interval}/>
+                <Timer interval={timer ? timer : interval}/>
          
             </Text>
         </View>

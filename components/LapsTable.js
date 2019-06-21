@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet,View,ScrollView} from 'react-native';
 import Lap from './Lap';
-const LapsTable=({laps})=>{
+const LapsTable=({laps,timer})=>{
 
     // alert(laps)
 
@@ -12,7 +12,7 @@ const LapsTable=({laps})=>{
     const max=Math.min(...finishedLaps);
 
     const lapsView=laps.map((lap,index)=>{
-        return <Lap slowest={lap===min} fastest={lap===max} key={laps.length-index} number={laps.length-index} interval={lap}/>
+        return <Lap slowest={lap===min} fastest={lap===max} key={laps.length-index} number={laps.length-index} interval={timer ? timer : lap} />
     })
 
     return(

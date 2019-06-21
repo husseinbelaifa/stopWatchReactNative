@@ -50,10 +50,10 @@ export default class App extends Component<Props> {
         <Timer  interval={this.state.now-this.state.start} style={styles.timer}/>
         <ButtonRow>
         
-       {startOrReset}
+        <RoundButton title='Start' color='#50d167' backgroundColor='#1b361f' onPressHandler={this.start}/>
           <RoundButton disabled="false" title='Reset' color='#fff' backgroundColor='#1b361f'/>
           </ButtonRow>
-          <LapsTable laps={this.state.laps} />
+          <LapsTable laps={this.state.laps} timer={this.state.now-this.state.start} />
       </View>
     );
   }
