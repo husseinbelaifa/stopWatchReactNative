@@ -13,7 +13,7 @@ import Timer from './components/Timer';
 type Props = {};
 export default class App extends Component<Props> {
 
-  state={timer:'123456'}
+  state={timer:985412}
   render() {
     return (
       <View style={styles.container}>
@@ -26,9 +26,9 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0d0d0d',
+    paddingTop: 130,
   }
  
  
