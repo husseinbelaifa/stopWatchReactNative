@@ -1,6 +1,6 @@
 import React from 'react';
 import {View,StyleSheet} from 'react-native';
-import RoundButton from './RoundButton';
+
 
 const ButtonRow=({children})=>{
 
@@ -19,7 +19,8 @@ const styles=StyleSheet.create({
     ButtonRow:{
        flexDirection:'row',
        alignSelf: 'stretch',
-       justifyContent:'space-between'
+       justifyContent:'space-between',
+       marginBottom: 30,
     }
     
 });
