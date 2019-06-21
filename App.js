@@ -15,14 +15,43 @@ import LapsTable from './components/LapsTable';
 type Props = {};
 export default class App extends Component<Props> {
 
-  state={timer:985412,laps:[12345,456,8745,9651]}
+  state={start:0,now:0,laps:[]}
+
+  start=(newDate)=>{
+    this.setState({start:newDate,now:newDate,laps:[0]});
+
+  }
+
+  componentDidMount(){
+     if(this.state.start){
+
+      setInterval(()=>{
+        this.setState({now:new Date().getTime()})
+      },100);
+
+     }
+   
+  }
+
+  componentDidUpdate(){
+
+    if(this.state.start){
+
+      setInterval(()=>{
+        this.setState({now:new Date().getTime()})
+      },100);
+
+    }
+
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Timer interval={this.state.timer} style={styles.timer}/>
+        <Timer  interval={this.state.now-this.state.start} style={styles.timer}/>
         <ButtonRow>
-        <RoundButton title='Start' color='#50d167' backgroundColor='#1b361f'/>
-          <RoundButton title='Reset' color='#fff' backgroundColor='#1b361f'/>
+        
+       {startOrReset}
+          <RoundButton disabled="false" title='Reset' color='#fff' backgroundColor='#1b361f'/>
           </ButtonRow>
           <LapsTable laps={this.state.laps} />
       </View>

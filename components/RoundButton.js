@@ -1,14 +1,17 @@
 import React from 'react';
-import {StyleSheet,View,Text} from 'react-native'
+import {StyleSheet,View,Text,TouchableOpacity} from 'react-native'
 
-const RoundButton=({title,color,backgroundColor})=>{
-
+const RoundButton=({title,color,backgroundColor,disabled,onPressHandler})=>{
+const newDate=new Date().getTime();
     return(
-        <View style={[styles.button,{backgroundColor:backgroundColor}]}>
+        <TouchableOpacity style={[styles.button,{backgroundColor:backgroundColor}]}
+           onPress={()=> !disabled && onPressHandler && onPressHandler(newDate)}
+           activeOpacity={disabled ? 1 :0.7}>
             <View style={styles.buttonBorder}>
             <Text style={[styles.buttonTitle,{color:color}]}>{title}</Text>
+            
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
 }
