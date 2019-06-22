@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
   }
 
   reset=()=>{
-    this.setState({start:0,now:0,laps:[0],timerStopped:0});
+    this.setState({start:0,now:0,laps:[],timerStopped:0});
   }
 
   resume=()=>{
@@ -45,9 +45,9 @@ export default class App extends Component<Props> {
 
   stop=()=>{
 
-    this.setState({timerStopped:this.state.now-this.state.start})
-
+   
     clearInterval(this.timer);
+    this.setState({timerStopped:this.state.now-this.state.start})
     this.setState({start:0,now:0});
 
   }
