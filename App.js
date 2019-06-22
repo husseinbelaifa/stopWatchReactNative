@@ -15,7 +15,7 @@ import LapsTable from './components/LapsTable';
 type Props = {};
 export default class App extends Component<Props> {
 
-  state={start:0,now:0,laps:[]}
+  state={start:0,now:0,laps:[],timerStopped:0}
 
   start=(newDate)=>{
     this.setState({start:newDate,now:newDate,laps:[0]});
@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
   }
 
   reset=()=>{
-    this.setState({start:0,now:0,laps:[0],timerStopped:0});
+    this.setState({start:0,now:0,laps:[],timerStopped:0});
   }
 
   resume=()=>{
