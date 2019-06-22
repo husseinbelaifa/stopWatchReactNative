@@ -19,42 +19,15 @@ export default class App extends Component<Props> {
 
   start=(newDate)=>{
     this.setState({start:newDate,now:newDate,laps:[0]});
+    this.timer=setInterval(()=>{
+      this.setState({now:new Date().getTime()})
+    },100);
 
-  }
-
-  stop=()=>{
-    alert('stop');
-  }
-
-  
-  componentDidMount(){
-     if(this.state.start){
-
-
-      this.timer=setInterval(()=>{
-        this.setState({now:new Date().getTime()})
-      },100);
-
-      
-
-     }
-   
-  }
-
-  componentDidUpdate(){
-
-    if(this.state.start){
-
-      this.timer=setInterval(()=>{
-        this.setState({now:new Date().getTime()})
-      },100);
-
-    }
 
   }
 
   reset=()=>{
-    this.setState({start:0,now:0,laps:[0]});
+    this.setState({start:0,now:0,laps:[0],timerStopped:0});
   }
 
   resume=()=>{
@@ -71,6 +44,8 @@ export default class App extends Component<Props> {
   }
 
   stop=()=>{
+
+    this.setState({timerStopped:this.state.now-this.state.start})
 
     clearInterval(this.timer);
     this.setState({start:0,now:0});
@@ -90,7 +65,7 @@ export default class App extends Component<Props> {
  
     return (
       <View style={styles.container}>
-        <Timer  interval={this.state.now-this.state.start} style={styles.timer}/>
+        <Timer  interval={this.state.timerStopped ? (this.state.now-this.state.start)+this.state.timerStopped :  this.state.now-this.state.start} style={styles.timer}/>
       
 
           {this.state.laps.length===0 && (
@@ -127,7 +102,7 @@ export default class App extends Component<Props> {
           }
          
      
-          <LapsTable laps={this.state.laps} timer= {this.state.now-this.state.start} />
+          <LapsTable laps={this.state.laps} timer= {this.state.timerStopped ? (this.state.now-this.state.start)+this.state.timerStopped :  this.state.now-this.state.start} />
       </View>
     );
   }

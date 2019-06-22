@@ -44,7 +44,7 @@ if(title==='Resume'){
    
 
         <TouchableOpacity style={[styles.button,{backgroundColor:backgroundColor}]}
-        onPress={()=>  onResetHandler && onResumeHandler()}
+        onPress={()=>  onResumeHandler && onResumeHandler()}
         
         activeOpacity={disabled ? 1 :0.7}>
          <View style={styles.buttonBorder}>
