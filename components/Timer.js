@@ -3,13 +3,15 @@ import {Text,StyleSheet} from 'react-native';
 import moment from 'moment';
 const Timer=({interval,style})=>{
 
+    const pad=(n)=>n<10?`0${n}`:n
+
    
 
     const duration=moment.duration(interval);
     const centiSecond=Math.floor(duration.milliseconds()/10);
     return(
     <Text style={style}>
-    {duration.minutes()}:{duration.seconds()},{centiSecond}
+    {pad(duration.minutes())}:{pad(duration.seconds())},{pad(centiSecond)}
     </Text>
     );
 

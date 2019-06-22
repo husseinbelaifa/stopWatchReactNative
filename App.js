@@ -22,12 +22,20 @@ export default class App extends Component<Props> {
 
   }
 
+  stop=()=>{
+    alert('stop');
+  }
+
+  
   componentDidMount(){
      if(this.state.start){
 
-      setInterval(()=>{
+
+      this.timer=setInterval(()=>{
         this.setState({now:new Date().getTime()})
       },100);
+
+      
 
      }
    
@@ -37,23 +45,89 @@ export default class App extends Component<Props> {
 
     if(this.state.start){
 
-      setInterval(()=>{
+      this.timer=setInterval(()=>{
         this.setState({now:new Date().getTime()})
       },100);
 
     }
 
   }
+
+  reset=()=>{
+    this.setState({start:0,now:0,laps:[0]});
+  }
+
+  resume=()=>{
+
+    const newDate=new Date().getTime();
+
+    this.setState({start:newDate,now:newDate})
+
+    this.timer=setInterval(()=>{
+      this.setState({now:new Date().getTime()})
+    },100);
+
+
+  }
+
+  stop=()=>{
+
+    clearInterval(this.timer);
+    this.setState({start:0,now:0});
+
+  }
+
+  lap=()=>{
+    this.setState({laps:[this.state.now-this.state.start,...this.state.laps]});
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timer);
+  }
+
+  
   render() {
+ 
     return (
       <View style={styles.container}>
         <Timer  interval={this.state.now-this.state.start} style={styles.timer}/>
-        <ButtonRow>
+      
+
+          {this.state.laps.length===0 && (
+
+<ButtonRow>
+
+<RoundButton title='Start' color='#50d167' backgroundColor='#1b361f' onPressHandler={this.start}/>
+<RoundButton title='Reset' onResetHandler={this.reset}    color='#FFFFFF' backgroundColor='#3D3D3D'/>
+
+</ButtonRow>)
+          
+          
+          }
         
-        <RoundButton title='Start' color='#50d167' backgroundColor='#1b361f' onPressHandler={this.start}/>
-          <RoundButton disabled="false" title='Reset' color='#fff' backgroundColor='#1b361f'/>
-          </ButtonRow>
-          <LapsTable laps={this.state.laps} timer={this.state.now-this.state.start} />
+        {this.state.start>0 && (
+
+<ButtonRow>
+<RoundButton title='Stop' color='#e33935' backgroundColor='#3c1715' onStopHandler={this.stop}/>
+ <RoundButton title='Lap'    color='#FFFFFF' backgroundColor='#3D3D3D' onLapHandler={this.lap}/>
+</ButtonRow>
+
+        )}
+
+{this.state.laps.length>0 && this.state.start===0 &&  (
+
+<ButtonRow>
+
+<RoundButton title='Resume' color='#50d167' backgroundColor='#1b361f' onResumeHandler={this.resume}/>
+<RoundButton title='Reset' onResetHandler={this.reset}    color='#FFFFFF' backgroundColor='#3D3D3D'/>
+
+</ButtonRow>)
+          
+          
+          }
+         
+     
+          <LapsTable laps={this.state.laps} timer= {this.state.now-this.state.start} />
       </View>
     );
   }
