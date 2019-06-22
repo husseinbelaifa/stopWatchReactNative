@@ -56,7 +56,7 @@ export default class App extends Component<Props> {
     if(this.state.now-this.state.start>0){
       const newLaps=this.state.laps.filter(lap=>lap!==0);
       
-      this.setState({laps:[this.state.now-this.state.start,...newLaps]});
+      this.setState({laps:[(this.state.now-this.state.start)-this.state.laps[0],...newLaps]});
     
     }
      
