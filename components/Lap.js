@@ -16,7 +16,9 @@ const Lap=({number,interval,fastest,slowest,timer})=>{
             <Text style={lapStyle}>Lap {number}</Text>
             <Text style={lapStyle}>
 
-                <Timer interval={timer ? timer : interval}/>
+               
+
+                <Timer interval={interval}/>
          
             </Text>
         </View>

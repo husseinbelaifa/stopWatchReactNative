@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
   }
 
   reset=()=>{
-    this.setState({start:0,now:0,laps:[],timerStopped:0});
+    this.setState({start:0,now:0,laps:[0],timerStopped:0});
   }
 
   resume=()=>{
@@ -53,7 +53,13 @@ export default class App extends Component<Props> {
   }
 
   lap=()=>{
-    this.setState({laps:[this.state.now-this.state.start,...this.state.laps]});
+    if(this.state.now-this.state.start>0){
+      const newLaps=this.state.laps.filter(lap=>lap!==0);
+      
+      this.setState({laps:[this.state.now-this.state.start,...newLaps]});
+    
+    }
+     
   }
 
   componentWillUnmount(){
